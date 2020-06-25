@@ -1,4 +1,13 @@
-class Human{
+
+interface Member{
+    boolean run(int x);
+    boolean jump(int x);
+    int getMaxRun();
+    int getMaxJump();
+}
+
+class Human implements Member{
+
     private int maxRun;
     private int maxJump;
 
@@ -7,218 +16,195 @@ class Human{
         this.maxJump = maxJump;
     }
 
-    boolean successRun(int distance){
-        if(distance<=maxRun){
-            System.out.println("Успешно пробежал");
+    @Override
+    public boolean run(int x) {
+        if(x<=maxRun){
+            System.out.println("Human успешно пробежал");
             return true;
-        } else {
-            System.out.println("Не смог пробежать");
-            return false;
         }
+        System.out.println("Human не пробежал");
+        return false;
     }
 
-    boolean successJump(int level){
-        if(level<=maxJump){
-            System.out.println("Успешно прыгнул");
+    @Override
+    public boolean jump(int x) {
+        if(x<=maxJump){
+            System.out.println("Human успешно прыгнул");
             return true;
-        } else {
-            System.out.println("Не смог допрыгнуть");
-            return false;
         }
+        System.out.println("Human не прыгнул");
+        return false;
+    }
+
+
+    public int getMaxJump() {
+        return maxJump;
     }
 
     public int getMaxRun() {
         return maxRun;
     }
-
-    public int getMaxJump() {
-        return maxJump;
-    }
 }
 
-class Cat{
+class Cat implements Member{
+
     private int maxRun;
     private int maxJump;
 
-    public Cat(int maxRun, int maxJump) {
+    public Cat(int maxRun, int maxJump){
         this.maxRun = maxRun;
         this.maxJump = maxJump;
     }
 
-    boolean successRun(int distance){
-        if(distance<=maxRun){
-            System.out.println("Успешно пробежал");
+    @Override
+    public boolean run(int x) {
+        if(x<=maxRun){
+            System.out.println("Cat успешно пробежал");
             return true;
-        } else {
-            System.out.println("Не смог пробежать");
-            return false;
         }
+        System.out.println("Cat не пробежал");
+        return false;
     }
 
-    boolean successJump(int level){
-        if(level<=maxJump){
-            System.out.println("Успешно прыгнул");
+    @Override
+    public boolean jump(int x) {
+        if(x<=maxJump){
+            System.out.println("Cat успешно прыгнул");
             return true;
-        } else {
-            System.out.println("Не смог допрыгнуть");
-            return false;
         }
+        System.out.println("Cat не прыгнул");
+        return false;
+    }
+
+
+    public int getMaxJump() {
+        return maxJump;
     }
 
     public int getMaxRun() {
         return maxRun;
     }
-
-    public int getMaxJump() {
-        return maxJump;
-    }
 }
 
-class Robot{
+class Robot implements Member{
+
     private int maxRun;
     private int maxJump;
 
-    public Robot(int maxRun, int maxJump) {
+    public Robot(int maxRun, int maxJump){
         this.maxRun = maxRun;
         this.maxJump = maxJump;
     }
 
-    boolean successRun(int distance){
-        if(distance<=maxRun){
-            System.out.println("Успешно пробежал");
+    @Override
+    public boolean run(int x) {
+        if(x<=maxRun){
+            System.out.println("Robot успешно пробежал");
             return true;
-        } else {
-            System.out.println("Не смог пробежать");
-            return false;
         }
+        System.out.println("Robot не пробежал");
+        return false;
     }
 
-    boolean successJump(int level){
-        if(level<=maxJump){
-            System.out.println("Успешно прыгнул");
+    @Override
+    public boolean jump(int x) {
+        if(x<=maxJump){
+            System.out.println("Robot успешно прыгнул");
             return true;
-        } else {
-            System.out.println("Не смог допрыгнуть");
-            return false;
         }
+        System.out.println("Robot не прыгнул");
+        return false;
+    }
+
+
+    public int getMaxJump() {
+        return maxJump;
     }
 
     public int getMaxRun() {
         return maxRun;
     }
-
-    public int getMaxJump() {
-        return maxJump;
-    }
 }
 
-class RunTrack{
-    private int length;
+abstract class Obstacle{
 
-    public RunTrack(int length) {
-        this.length = length;
+    private int limit;
+
+    public int getLimit() {
+        return limit;
     }
 
-    public int getLength() {
-        return length;
+    public Obstacle(int limit){
+        this.limit = limit;
     }
+
+    abstract boolean action(Member m);
 }
 
-class Wall{
-    private int height;
+class Wall extends Obstacle{
+    private int limit;
 
-    public Wall(int height) {
-        this.height = height;
+    public Wall(int limit) {
+        super(limit);
     }
 
-    public int getHeight() {
-        return height;
+    boolean action(Member m){
+        return m.jump(getLimit());
     }
+
+
+
+}
+
+class Track extends Obstacle{
+    private  int limit;
+
+    public Track(int limit) {
+        super(limit);
+    }
+
+    boolean action(Member m){
+        return m.run(getLimit());
+    }
+
+
 }
 
 
 public class Hw3 {
+
     public static void main(String[] args) {
 
-
-        Object[] obstacles = new Object[10];
-        for (int i = 0; i <10 ; i++) {
-            if(i%2==0)
-            obstacles[i]= new RunTrack(i);
-            else obstacles[i]= new Wall(i);
-        }
-
-        Object[] members = new Object[6];
-
+        Member[] members = new Member[6];
         for (int i = 0; i <2 ; i++) {
-            members[i] = new Human(i+3,i);
+            members[i] = new Human(i+3,i+1);
         }
         for (int i = 2; i <4 ; i++) {
-            members[i] = new Cat(i,i+4);
+            members[i] = new Cat(i+2,i+4);
         }
         for (int i = 4; i <6 ; i++) {
             members[i] = new Robot(i+5,i+5);
         }
 
-        for ( Object x:members ) {
-
-            if (x instanceof Human) {
-                System.out.println("Max run: "+((Human) x).getMaxRun() + " Max Jump: "+((Human) x).getMaxJump() );
-
-            }
-            if (x instanceof Cat) {
-                System.out.println("Max run: "+((Cat) x).getMaxRun() + " Max Jump: "+((Cat) x).getMaxJump() );
-
-            }
-            if (x instanceof Robot) {
-                System.out.println("Max run: "+((Robot) x).getMaxRun() + " Max Jump: "+((Robot) x).getMaxJump() );
-
-            }
-
-
-            boolean it1 = true, it2=true;
-            for (Object y:obstacles){
-                if(it1 && it2) {
-
-                    if (x instanceof Human) {
-                        if (y instanceof RunTrack) {
-                            System.out.println("Need run: "+((RunTrack) y).getLength() );
-                            it1 = ((Human) x).successRun(((RunTrack) y).getLength());
-                        }
-                        if(y instanceof Wall){
-                            System.out.println("Need jump: "+((Wall) y).getHeight());
-                            it2 = ((Human) x).successJump(((Wall) y).getHeight());
-                        }
-                    }
-
-                    if (x instanceof Cat) {
-                        if (y instanceof RunTrack) {
-                            System.out.println("Need run: "+((RunTrack) y).getLength() );
-                            it1 = ((Cat) x).successRun(((RunTrack) y).getLength());
-                        }
-                        if(y instanceof Wall){
-                            System.out.println("Need jump: "+((Wall) y).getHeight());
-                            it2 = ((Cat) x).successJump(((Wall) y).getHeight());
-                        }
-                    }
-
-                    if (x instanceof Robot) {
-                        if (y instanceof RunTrack) {
-                            System.out.println("Need run: "+((RunTrack) y).getLength() );
-                            it1 = ((Robot) x).successRun(((RunTrack) y).getLength());
-                        }
-                        if(y instanceof Wall){
-                            System.out.println("Need jump: "+((Wall) y).getHeight());
-                            it2 = ((Robot) x).successJump(((Wall) y).getHeight());
-                        }
-                    }
-
-                }
-            }
-            System.out.println();
+        Obstacle[] obstacles = new Obstacle[10];
+        for (int i = 0; i <10 ; i++) {
+            if(i%2==0)
+                obstacles[i]= new Track(i);
+            else obstacles[i]= new Wall(i);
         }
 
+        for(Member x:members){
+            boolean it1 = true;
+            System.out.println(x.getClass().getSimpleName()+" Run: "+x.getMaxRun()+" Jump: "+x.getMaxJump());
 
+            for(Obstacle y:obstacles){
+
+                if(it1) {
+                    System.out.println("Current "+y.getClass().getSimpleName()+" "+y.getLimit());
+                    it1 = y.action(x);
+                }
+            }
+        }
 
     }
 }
