@@ -128,7 +128,7 @@ class Robot implements Member{
 
 abstract class Obstacle{
 
-    private int limit;
+    protected int limit;
 
     public int getLimit() {
         return limit;
@@ -142,14 +142,13 @@ abstract class Obstacle{
 }
 
 class Wall extends Obstacle{
-    private int limit;
 
     public Wall(int limit) {
         super(limit);
     }
 
     boolean action(Member m){
-        return m.jump(getLimit());
+        return m.jump(limit);
     }
 
 
@@ -157,14 +156,13 @@ class Wall extends Obstacle{
 }
 
 class Track extends Obstacle{
-    private  int limit;
 
     public Track(int limit) {
         super(limit);
     }
 
     boolean action(Member m){
-        return m.run(getLimit());
+        return m.run(limit);
     }
 
 
