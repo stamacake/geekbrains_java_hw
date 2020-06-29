@@ -36,12 +36,12 @@ class PhoneBook {
         if (people.containsKey(name)) {
             System.out.println(name);
             List<Long> phones = people.get(name);
-            for(Long phone:phones){
+            for (Long phone : phones) {
                 System.out.println(phone);
             }
 
         } else {
-            System.out.println("No such name");
+            System.out.println(name + " - No such name");
         }
         System.out.println();
     }
@@ -57,12 +57,12 @@ public class Hw6 {
 
         PhoneBook phoneBook = new PhoneBook();
 
-        phoneBook.add("Hideo",12345566L);
-        phoneBook.add("Hideo",15516145L);
-        phoneBook.add("Todd",23895923L);
-        phoneBook.add("IceFrog",14883228L);
-        phoneBook.add("IceFrog",32281488L);
-        phoneBook.add("IceFrog",253295209L);
+        phoneBook.add("Hideo", 12345566L);
+        phoneBook.add("Hideo", 15516145L);
+        phoneBook.add("Todd", 23895923L);
+        phoneBook.add("IceFrog", 14883228L);
+        phoneBook.add("IceFrog", 32281488L);
+        phoneBook.add("IceFrog", 253295209L);
 
         phoneBook.get("IceFrog");
         phoneBook.get("Hideo");
