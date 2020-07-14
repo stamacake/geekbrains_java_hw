@@ -1,8 +1,8 @@
-package Hw10;
+package Hw11;
 
-import Hw10.TestClass.After;
-import Hw10.TestClass.Before;
-import Hw10.TestClass.Test;
+import Hw11.TestClass.After;
+import Hw11.TestClass.Before;
+import Hw11.TestClass.Test;
 
 public class TestTest {
     @After
