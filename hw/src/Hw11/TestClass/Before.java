@@ -1,4 +1,4 @@
-package Hw10.TestClass;
+package Hw11.TestClass;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,5 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface After {
+public @interface Before {
 }

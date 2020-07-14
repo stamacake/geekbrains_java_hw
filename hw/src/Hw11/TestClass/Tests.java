@@ -1,4 +1,4 @@
-package Hw10.TestClass;
+package Hw11.TestClass;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

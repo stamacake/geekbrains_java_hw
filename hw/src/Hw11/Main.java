@@ -1,6 +1,6 @@
-package Hw10;
+package Hw11;
 
-import Hw10.TestClass.Tests;
+import Hw11.TestClass.Tests;
 
 //        Before
 //        Test 2 private pr=7
