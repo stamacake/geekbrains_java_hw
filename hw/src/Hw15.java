@@ -20,7 +20,7 @@ import static java.nio.file.StandardOpenOption.*;
 public class Hw15 {
 
     public static int countSeq(String fileName, String sequence) throws IOException {
-        RandomAccessFile aFile = new RandomAccessFile("hw/resources/text.txt", "r");
+        RandomAccessFile aFile = new RandomAccessFile(fileName, "r");
         char[] seq = sequence.toCharArray();
         FileChannel inChannel = aFile.getChannel();
         int i = 0;
@@ -30,7 +30,7 @@ public class Hw15 {
         int bytesRead = -5;
         char w1='1';
         char w2[];
-        ByteBuffer buf2 = ByteBuffer.allocate(sequence.length()-1);;
+        ByteBuffer buf2 = ByteBuffer.allocate(sequence.length()-1);
         while (bytesRead != -1) {
             pos = inChannel.position();
             buf.clear();
@@ -101,7 +101,7 @@ public class Hw15 {
 
     public static void main(String[] args) throws IOException {
 
-        System.out.println(countSeq("hw/resources/text.txt", "0001"));
+        System.out.println(countSeq("hw/resources/text.txt", "1234"));
         mergeFiles("hw/resources/files");
 
         System.out.println(   filesWithSize("hw/resources/tree1"));
